@@ -37,14 +37,14 @@ extension UIView {
                 self.layoutSkeletonIfNeeded()
             }
         }
-        if Thread.isMainThread {
-            action()
-        }
-        else {
+//        if Thread.isMainThread {
+//            action()
+//        }
+//        else {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
                 action()
             }
-        }
+//        }
     }
     
     func unSwizzleLayoutSubviews() {
@@ -55,14 +55,14 @@ extension UIView {
                         class: UIView.self)
             }
         }
-        if Thread.isMainThread {
-            action()
-        }
-        else {
+//        if Thread.isMainThread {
+//            action()
+//        }
+//        else {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
                 action()
             }
-        }
+//        }
     }
     
     func swizzleTraitCollectionDidChange() {
@@ -73,14 +73,14 @@ extension UIView {
                         class: UIView.self)
             }
         }
-        if Thread.isMainThread {
-            action()
-        }
-        else {
+//        if Thread.isMainThread {
+//            action()
+//        }
+//        else {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
                 action()
             }
-        }
+//        }
     }
     
     func unSwizzleTraitCollectionDidChange() {
@@ -91,14 +91,14 @@ extension UIView {
                         class: UIView.self)
             }
         }
-        if Thread.isMainThread {
-            action()
-        }
-        else {
+//        if Thread.isMainThread {
+//            action()
+//        }
+//        else {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
                 action()
             }
-        }
+//        }
     }
     
 }
