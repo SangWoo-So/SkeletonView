@@ -29,8 +29,7 @@ extension UIView {
     }
     
     func swizzleLayoutSubviews() {
-        DispatchQueue.main.async {
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+        func action () {
             DispatchQueue.once(token: "UIView.SkeletonView.swizzleLayoutSubviews") {
                 swizzle(selector: #selector(UIView.layoutSubviews),
                         with: #selector(UIView.skeletonLayoutSubviews),
@@ -38,37 +37,66 @@ extension UIView {
                 self.layoutSkeletonIfNeeded()
             }
         }
+        if Thread.isMainThread {
+            action()
+        }
+        else {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+                action()
+            }
+        }
     }
     
     func unSwizzleLayoutSubviews() {
-        DispatchQueue.main.async {
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+        func action() {
             DispatchQueue.removeOnce(token: "UIView.SkeletonView.swizzleLayoutSubviews") {
                 swizzle(selector: #selector(UIView.skeletonLayoutSubviews),
                         with: #selector(UIView.layoutSubviews),
                         class: UIView.self)
             }
         }
+        if Thread.isMainThread {
+            action()
+        }
+        else {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+                action()
+            }
+        }
     }
     
     func swizzleTraitCollectionDidChange() {
-        DispatchQueue.main.async {
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+        func action() {
             DispatchQueue.once(token: "UIView.SkeletonView.swizzleTraitCollectionDidChange") {
                 swizzle(selector: #selector(UIView.traitCollectionDidChange(_:)),
                         with: #selector(UIView.skeletonTraitCollectionDidChange(_:)),
                         class: UIView.self)
             }
         }
+        if Thread.isMainThread {
+            action()
+        }
+        else {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+                action()
+            }
+        }
     }
     
     func unSwizzleTraitCollectionDidChange() {
-        DispatchQueue.main.async {
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+        func action() {
             DispatchQueue.removeOnce(token: "UIView.SkeletonView.swizzleTraitCollectionDidChange") {
                 swizzle(selector: #selector(UIView.skeletonTraitCollectionDidChange(_:)),
                         with: #selector(UIView.traitCollectionDidChange(_:)),
                         class: UIView.self)
+            }
+        }
+        if Thread.isMainThread {
+            action()
+        }
+        else {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+                action()
             }
         }
     }
