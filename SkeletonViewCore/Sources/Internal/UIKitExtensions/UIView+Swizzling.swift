@@ -29,7 +29,8 @@ extension UIView {
     }
     
     func swizzleLayoutSubviews() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+        DispatchQueue.main.async {
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
             DispatchQueue.once(token: "UIView.SkeletonView.swizzleLayoutSubviews") {
                 swizzle(selector: #selector(UIView.layoutSubviews),
                         with: #selector(UIView.skeletonLayoutSubviews),
@@ -40,7 +41,8 @@ extension UIView {
     }
     
     func unSwizzleLayoutSubviews() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+        DispatchQueue.main.async {
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
             DispatchQueue.removeOnce(token: "UIView.SkeletonView.swizzleLayoutSubviews") {
                 swizzle(selector: #selector(UIView.skeletonLayoutSubviews),
                         with: #selector(UIView.layoutSubviews),
@@ -50,7 +52,8 @@ extension UIView {
     }
     
     func swizzleTraitCollectionDidChange() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+        DispatchQueue.main.async {
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
             DispatchQueue.once(token: "UIView.SkeletonView.swizzleTraitCollectionDidChange") {
                 swizzle(selector: #selector(UIView.traitCollectionDidChange(_:)),
                         with: #selector(UIView.skeletonTraitCollectionDidChange(_:)),
@@ -60,7 +63,8 @@ extension UIView {
     }
     
     func unSwizzleTraitCollectionDidChange() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+        DispatchQueue.main.async {
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
             DispatchQueue.removeOnce(token: "UIView.SkeletonView.swizzleTraitCollectionDidChange") {
                 swizzle(selector: #selector(UIView.skeletonTraitCollectionDidChange(_:)),
                         with: #selector(UIView.traitCollectionDidChange(_:)),
