@@ -14,17 +14,19 @@ import Foundation
 //    }
 //}
 
+
 func swizzle(selector originalSelector: Selector, with swizzledSelector: Selector, inClass: AnyClass, usingClass: AnyClass) {
-    guard let originalMethod = class_getInstanceMethod(inClass, originalSelector),
-        let swizzledMethod = class_getInstanceMethod(usingClass, swizzledSelector)
+    guard let c_inClass = object_getClass(inClass), let c_usingClass = object_getClass(usingClass) else { return }
+    guard let originalMethod = class_getInstanceMethod(c_inClass, originalSelector),
+        let swizzledMethod = class_getInstanceMethod(c_usingClass, swizzledSelector)
         else { return }
     
-    if class_addMethod(inClass, swizzledSelector, method_getImplementation(originalMethod), method_getTypeEncoding(originalMethod)) {
-        class_replaceMethod(inClass, originalSelector, method_getImplementation(swizzledMethod), method_getTypeEncoding(swizzledMethod))
+    if class_addMethod(c_inClass, swizzledSelector, method_getImplementation(originalMethod), method_getTypeEncoding(originalMethod)) {
+        class_replaceMethod(c_inClass, originalSelector, method_getImplementation(swizzledMethod), method_getTypeEncoding(swizzledMethod))
     }
     else {
 //        method_exchangeImplementations(originalMethod, swizzledMethod)
-        guard let originalIMP = class_getMethodImplementation(inClass, originalSelector), let swizzledIMP = class_getMethodImplementation(usingClass, swizzledSelector) else {
+        guard let originalIMP = class_getMethodImplementation(c_inClass, originalSelector), let swizzledIMP = class_getMethodImplementation(c_usingClass, swizzledSelector) else {
             return
         }
         method_setImplementation(originalMethod, swizzledIMP)
