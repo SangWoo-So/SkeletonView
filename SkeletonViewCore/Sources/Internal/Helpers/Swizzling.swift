@@ -23,12 +23,12 @@ func swizzle(selector originalSelector: Selector, with swizzledSelector: Selecto
         class_replaceMethod(inClass, originalSelector, method_getImplementation(swizzledMethod), method_getTypeEncoding(swizzledMethod))
     }
     else {
+//        method_exchangeImplementations(originalMethod, swizzledMethod)
         guard let originalIMP = class_getMethodImplementation(inClass, originalSelector), let swizzledIMP = class_getMethodImplementation(usingClass, swizzledSelector) else {
             return
         }
         method_setImplementation(originalMethod, swizzledIMP)
         method_setImplementation(swizzledMethod, originalIMP)
-//        method_exchangeImplementations(originalMethod, swizzledMethod)
 //        
 //        method_setImplementation(origin, <#T##imp: IMP##IMP#>)
     }
