@@ -33,8 +33,7 @@ extension UIView {
             DispatchQueue.once(token: "UIView.SkeletonView.swizzleLayoutSubviews") {
                 swizzle(selector: #selector(self.layoutSubviews),
                         with: #selector(self.skeletonLayoutSubviews),
-                        inClass: Self.self,
-                        usingClass: Self.self)
+                        class: Self.self)
                 self.layoutSkeletonIfNeeded()
             }
         }
@@ -45,8 +44,7 @@ extension UIView {
             DispatchQueue.removeOnce(token: "UIView.SkeletonView.swizzleLayoutSubviews") {
                 swizzle(selector: #selector(self.skeletonLayoutSubviews),
                         with: #selector(self.layoutSubviews),
-                        inClass: Self.self,
-                        usingClass: Self.self)
+                        class: Self.self)
             }
         }
     }
@@ -56,8 +54,7 @@ extension UIView {
             DispatchQueue.once(token: "UIView.SkeletonView.swizzleTraitCollectionDidChange") {
                 swizzle(selector: #selector(self.traitCollectionDidChange(_:)),
                         with: #selector(self.skeletonTraitCollectionDidChange(_:)),
-                        inClass: Self.self,
-                        usingClass: Self.self)
+                        class: Self.self)
             }
         }
     }
@@ -67,8 +64,7 @@ extension UIView {
             DispatchQueue.removeOnce(token: "UIView.SkeletonView.swizzleTraitCollectionDidChange") {
                 swizzle(selector: #selector(self.skeletonTraitCollectionDidChange(_:)),
                         with: #selector(self.traitCollectionDidChange(_:)),
-                        inClass: Self.self,
-                        usingClass: Self.self)
+                        class: Self.self)
             }
         }
     }
