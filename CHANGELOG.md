@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file
 ### Next version
 
 #### 🙌 New
+* Support `UITableViewDiffableDataSource` and `UICollectionViewDiffableDataSource` with `registerSkeletonCell(_:forCellReuseIdentifier:)` / `registerSkeletonCell(_:forCellWithReuseIdentifier:)`. `apply` no longer crashes while the skeleton is shown. The number of skeleton sections and rows/items can be set, and by default the skeleton fills the view.
+* Diffable table views: skeleton `rowHeight` (for `automaticDimension` tables), skeleton section headers (`viewForHeaderInSection` / `heightForHeaderInSection`) and several skeleton cells (`registerSkeletonCell((type:identifier:)...)` with `cellIdentifierForRowAt` / `prepareCellForSkeleton`).
 
 #### 🔬 Improvements
 * [**369**](https://github.com/Juanpe/SkeletonView/pull/369): remove useless corner radius constraint - [@Juanpe](https://github.com/Juanpe)

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		673A30E2E1EB068B297C2E0E /* SkeletonDiffableOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC7DFD23D32ACED533599C7 /* SkeletonDiffableOverlay.swift */; };
+		C1A68F00FCA332CC948CD5EF /* SkeletonDiffableOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC7DFD23D32ACED533599C7 /* SkeletonDiffableOverlay.swift */; };
+		C6A415DA9FBC8B4DEE0DAFB9 /* SkeletonDiffableCellRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1084EB3A6A19F35C4B222E2 /* SkeletonDiffableCellRegistration.swift */; };
+		D4EB51D8C0F8F0A9FF09FFDE /* SkeletonDiffableCellRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1084EB3A6A19F35C4B222E2 /* SkeletonDiffableCellRegistration.swift */; };
 		F5225F2A278C2BCE0061A9B0 /* SkeletonTextNumberOfLines.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5225F29278C2BCE0061A9B0 /* SkeletonTextNumberOfLines.swift */; };
 		F5225F2B278C2BCE0061A9B0 /* SkeletonTextNumberOfLines.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5225F29278C2BCE0061A9B0 /* SkeletonTextNumberOfLines.swift */; };
 		F53D731826D399E100249D46 /* SkeletonTreeNode+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F53D731726D399E100249D46 /* SkeletonTreeNode+Extensions.swift */; };
@@ -154,6 +158,8 @@
 
 /* Begin PBXFileReference section */
 		0AEC95C32AF537B600CD241A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		3FC7DFD23D32ACED533599C7 /* SkeletonDiffableOverlay.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SkeletonDiffableOverlay.swift; sourceTree = "<group>"; };
+		E1084EB3A6A19F35C4B222E2 /* SkeletonDiffableCellRegistration.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SkeletonDiffableCellRegistration.swift; sourceTree = "<group>"; };
 		F5225F29278C2BCE0061A9B0 /* SkeletonTextNumberOfLines.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonTextNumberOfLines.swift; sourceTree = "<group>"; };
 		F53D731726D399E100249D46 /* SkeletonTreeNode+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SkeletonTreeNode+Extensions.swift"; sourceTree = "<group>"; };
 		F53D731A26D3A35100249D46 /* SkeletonExtended.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonExtended.swift; sourceTree = "<group>"; };
@@ -545,6 +551,7 @@
 				OBJ_22 /* SkeletonCollectionDelegate.swift */,
 				OBJ_20 /* SkeletonReusableCell.swift */,
 				OBJ_14 /* CollectionSkeleton.swift */,
+				3FC7DFD23D32ACED533599C7 /* SkeletonDiffableOverlay.swift */,
 			);
 			path = Collections;
 			sourceTree = "<group>";
@@ -554,6 +561,7 @@
 			children = (
 				OBJ_23 /* TableViews */,
 				OBJ_15 /* CollectionViews */,
+				E1084EB3A6A19F35C4B222E2 /* SkeletonDiffableCellRegistration.swift */,
 			);
 			path = Collections;
 			sourceTree = "<group>";
@@ -855,6 +863,8 @@
 				F556F64E26CD2D3D00A80B83 /* SkeletonDebug.swift in Sources */,
 				F556F6A526CD5A9000A80B83 /* CALayer+Animations.swift in Sources */,
 				F556F58F26CD1F3900A80B83 /* UIView+Transitions.swift in Sources */,
+				C1A68F00FCA332CC948CD5EF /* SkeletonDiffableOverlay.swift in Sources */,
+				D4EB51D8C0F8F0A9FF09FFDE /* SkeletonDiffableCellRegistration.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -939,6 +949,8 @@
 				F556F64D26CD2CF800A80B83 /* SkeletonDebug.swift in Sources */,
 				F556F6A426CD5A9000A80B83 /* CALayer+Animations.swift in Sources */,
 				OBJ_127 /* UIView+Transitions.swift in Sources */,
+				673A30E2E1EB068B297C2E0E /* SkeletonDiffableOverlay.swift in Sources */,
+				C6A415DA9FBC8B4DEE0DAFB9 /* SkeletonDiffableCellRegistration.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

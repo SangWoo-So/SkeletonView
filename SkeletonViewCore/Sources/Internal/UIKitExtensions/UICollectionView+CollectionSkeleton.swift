@@ -39,6 +39,7 @@ extension UICollectionView: CollectionSkeleton {
     }
     
     func addDummyDataSource() {
+        if addSkeletonOverlayIfNeeded() { return }
         guard let originalDataSource = self.dataSource as? SkeletonCollectionViewDataSource,
             !(originalDataSource is SkeletonCollectionDataSource)
             else { return }
@@ -49,6 +50,7 @@ extension UICollectionView: CollectionSkeleton {
     }
     
     func updateDummyDataSource() {
+        if updateSkeletonOverlay() { return }
         if (dataSource as? SkeletonCollectionDataSource) != nil {
             reloadData()
         } else {
@@ -57,6 +59,7 @@ extension UICollectionView: CollectionSkeleton {
     }
     
     func removeDummyDataSource(reloadAfter: Bool) {
+        if removeSkeletonOverlay() { return }
         guard let dataSource = self.dataSource as? SkeletonCollectionDataSource else { return }
         self.skeletonDataSource = nil
         self.dataSource = dataSource.originalCollectionViewDataSource

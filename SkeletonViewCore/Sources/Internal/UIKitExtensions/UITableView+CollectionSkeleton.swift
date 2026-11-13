@@ -11,6 +11,8 @@ import UIKit
 extension UITableView: CollectionSkeleton {
 
     var estimatedNumberOfRows: Int {
+        // `automaticDimension` (-1) would give a negative count
+        guard rowHeight > 0, frame.height > 0 else { return 0 }
         return Int(ceil(frame.height / rowHeight))
     }
     
@@ -31,6 +33,7 @@ extension UITableView: CollectionSkeleton {
     }
     
     func addDummyDataSource() {
+        if addSkeletonOverlayIfNeeded() { return }
         guard let originalDataSource = self.dataSource as? SkeletonTableViewDataSource,
             !(originalDataSource is SkeletonCollectionDataSource)
             else { return }
@@ -51,6 +54,7 @@ extension UITableView: CollectionSkeleton {
     }
     
     func updateDummyDataSource() {
+        if updateSkeletonOverlay() { return }
         if (dataSource as? SkeletonCollectionDataSource) != nil {
             reloadData()
         } else {
@@ -59,6 +63,7 @@ extension UITableView: CollectionSkeleton {
     }
     
     func removeDummyDataSource(reloadAfter: Bool) {
+        if removeSkeletonOverlay() { return }
         guard let dataSource = self.dataSource as? SkeletonCollectionDataSource else { return }
         restoreRowHeight()
         self.skeletonDataSource = nil

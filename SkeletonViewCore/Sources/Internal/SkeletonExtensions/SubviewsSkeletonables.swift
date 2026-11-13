@@ -21,6 +21,9 @@ extension UITableView {
 		// Some developer trying to call `view.showAnimatedSkeleton()`
 		// when the request or data is loading which sometimes happens before the ViewDidAppear
 		guard window != nil else { return [] }
+
+        // the skeleton is drawn on the overlay: the real cells keep their content (diffable `apply` may update it)
+        guard !isSkeletonOverlayInstalled else { return [] }
         
         var result = [UIView]()
 
@@ -51,7 +54,9 @@ extension UITableViewHeaderFooterView {
 
 extension UICollectionView {
     override var subviewsToSkeleton: [UIView] {
-        subviews
+        // the skeleton is drawn on the overlay: the real cells keep their content (diffable `apply` may update it)
+        guard !isSkeletonOverlayInstalled else { return [] }
+        return subviews
     }
 }
 

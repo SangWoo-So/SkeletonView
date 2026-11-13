@@ -260,6 +260,67 @@ public protocol SkeletonCollectionViewDataSource: UICollectionViewDataSource {
 
 The rest of the process is the same as ```UITableView```
 
+**Diffable data sources**
+
+`UITableViewDiffableDataSource` and `UICollectionViewDiffableDataSource` are supported without subclassing them or adopting any protocol. Just register the cell used to draw the skeleton:
+
+```swift
+tableView.registerSkeletonCell(MyCell.self, forCellReuseIdentifier: "MyCell")
+// or with a nib
+tableView.registerSkeletonCell(UINib(nibName: "MyCell", bundle: nil), forCellReuseIdentifier: "MyCell")
+
+collectionView.registerSkeletonCell(MyCell.self, forCellWithReuseIdentifier: "MyCell")
+```
+
+Then use `showSkeleton()` and `hideSkeleton()` as usual. You can call `apply(_:animatingDifferences:)` at any time, even while the skeleton is shown.
+
+By default there is one section, filled with as many skeleton cells as fit in the view. You can set both:
+
+```swift
+tableView.registerSkeletonCell(MyCell.self, forCellReuseIdentifier: "MyCell", numberOfSections: 2, numberOfRows: 3)
+collectionView.registerSkeletonCell(MyCell.self, forCellWithReuseIdentifier: "MyCell", numberOfItems: 9)
+```
+
+If the table view uses `automaticDimension` for both `rowHeight` and `estimatedRowHeight`, the skeleton rows are 44 points high. Pass `rowHeight:` to match your cells; your table view's own heights aren't changed:
+
+```swift
+tableView.registerSkeletonCell(MyCell.self, forCellReuseIdentifier: "MyCell", rowHeight: 153)
+```
+
+Table views can also show skeleton section headers. `section` is the skeleton section (not a section of your snapshot), and the header's skeletonable subviews are skeletonized like the cells. Without `heightForHeaderInSection`, the height is the view's frame height, else its Auto Layout height. The closures are kept by the table view, so capture `self` weakly:
+
+```swift
+tableView.registerSkeletonCell(MyCell.self,
+                               forCellReuseIdentifier: "MyCell",
+                               viewForHeaderInSection: { [weak self] section in
+                                   section == 0 ? self?.makeSkeletonHeader() : nil
+                               },
+                               heightForHeaderInSection: { section in section == 0 ? 35 : 0 })
+```
+
+Table views can also register several cell classes. By default section N uses the Nth cell (the sections beyond use the last one); `cellIdentifierForRowAt` picks one per row instead. `prepareCellForSkeleton` is called on each skeleton cell before it's skeletonized, e.g. to fill placeholder texts. `indexPath` is the skeleton index path, not one of your snapshot:
+
+```swift
+tableView.registerSkeletonCell((type: HeaderStoreCell.self, identifier: "Header"),
+                               (type: StoreCell.self, identifier: "Store"),
+                               numberOfSections: 2,
+                               rowHeight: 153,
+                               cellIdentifierForRowAt: { indexPath in indexPath.section == 0 ? "Header" : "Store" },
+                               prepareCellForSkeleton: { cell, indexPath in
+                                   (cell as? StoreCell)?.nameLabel.text = "Placeholder"
+                               })
+```
+
+Only the last `registerSkeletonCell` call is kept. Calling it while the skeleton is shown takes effect from the next `showSkeleton()`.
+
+> 📣 **IMPORTANT!**
+>
+> The skeleton is drawn on an overlay view placed above your table or collection view, which is hidden meanwhile. This way the diffable data source is never replaced, and `apply` doesn't crash.
+>
+> - When it isn't set, the number of skeleton rows/items is calculated to fill the view (for collection views, lines × items per line).
+> - For `UICollectionView`, only `UICollectionViewFlowLayout` (and its subclasses) is supported. Item sizes, insets and spacings are taken from the layout and from your `UICollectionViewDelegateFlowLayout`.
+> - Footers and collection view supplementary views aren't drawn. Table view section headers are drawn only through `viewForHeaderInSection`.
+
 
 ### 🔠 Texts
 
